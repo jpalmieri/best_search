@@ -134,8 +134,8 @@
       var apiUrl = API_PATH + ENDPOINT_PATH[searchType];
 
       // Use a different endpoint if returning inactive items,
-      // except for dynamic content, which doesn't have this endpoint
-      if (includeInactive && searchType != 'dynamicContent') {
+      // except for dynamic content and articles, which doesn't have this endpoint
+      if (includeInactive && searchType != 'dynamicContent' && searchType != 'article') {
         apiUrl = apiUrl.replace('/active', '');
       }
       return apiUrl;
@@ -179,6 +179,15 @@
             return variant.active && !variant.default;
           });
           if (variantIsActive) item.active = true;
+        });
+      }
+
+      // Filter out drafts for articles unless checkbox is checked
+      var excludeDrafts = this.$('.check.status').not(':checked');
+      if (searchType == 'article' && excludeDrafts) {
+        results = _.reject(results, function(article){
+          console.log(article.draft);
+          return article.draft == true;
         });
       }
 
