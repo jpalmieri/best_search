@@ -9,28 +9,36 @@
         {{/if}}
       </td>
       <td>
+        <!-- clone and edit links -->
         {{#if ../../isDcSearch}}
-          <a href="/dynamic_content/items/{{this.id}}" target="_blank" class='edit-this'>
+          <a href="/dynamic_content/items/{{this.id}}"
+          target="_blank" class='edit-this'>
             edit
           </a>
-        {{else}}
-          {{#if ../../../isMacroSearch}}
-            <a href="admin/macros/new?macro_id={{this.id}}">
-              clone
-            </a>
-            <span class="delim">|</span>
-            <a href="admin/macros/{{this.id}}" class='edit-this'>
-              edit
-            </a>
-          {{else}}
-            <a href="/rules/new?copy_id={{this.id}}&filter={{../../type}}" target="_blank">
-              clone
-            </a>
-            <span class="delim">|</span>
-            <a href="/rules/{{this.id}}/edit" target="_blank" class='edit-this'>
-              edit
-            </a>
-          {{/if}}
+        {{/if}}
+        {{#if ../../isArticleSearch}}
+          <a href="/knowledge/articles/{{this.id}}/en-us?brand_id=196494"
+          target="_blank" class='edit-this'>
+            edit
+          </a>
+        {{/if}}
+        {{#if ../../isMacroSearch}}
+          <a href="admin/macros/new?macro_id={{this.id}}">
+            clone
+          </a>
+          <span class="delim">|</span>
+          <a href="admin/macros/{{this.id}}" class='edit-this'>
+            edit
+          </a>
+        {{/if}}
+        {{#if ../../isOtherSearch}}
+          <a href="/rules/new?copy_id={{this.id}}&filter={{../../type}}" target="_blank">
+            clone
+          </a>
+          <span class="delim">|</span>
+          <a href="/rules/{{this.id}}/edit" target="_blank" class='edit-this'>
+            edit
+          </a>
         {{/if}}
       </td>
       <td>{{this.created_at}}</td>

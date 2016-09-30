@@ -207,7 +207,9 @@
         results:    results,
         type:       searchType,
         isDcSearch: searchType == 'dynamicContent',
-        isMacroSearch: searchType == 'macro'
+        isMacroSearch: searchType == 'macro',
+        isArticleSearch: searchType == 'article',
+        isOtherSearch: searchType != 'dynamicContent' && searchType != 'macro' && searchType != 'article'
       };
       var resultsTemplate = this.renderTemplate('results', options);
       this.$('.results tbody').append(resultsTemplate);
