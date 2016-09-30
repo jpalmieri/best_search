@@ -6,7 +6,8 @@
     trigger: '/triggers/active.json',
     automation: '/automations/active.json',
     view: '/views/active.json',
-    dynamicContent: '/dynamic_content/items.json'
+    dynamicContent: '/dynamic_content/items.json',
+    article: '/help_center/articles.json'
   };
   var NEW_ITEM_PATH = {
     macro: '/rules/new?filter=macro',
@@ -242,6 +243,13 @@
         var query = this.getStringQuery('title');
         return _.filter(items, function(item) {
           return item.title.match(query);
+        });
+      },
+
+      body: function(items) {
+        var query = this.getStringQuery('body');
+        return _.filter(items, function(item) {
+          return item.body.match(query);
         });
       },
 
