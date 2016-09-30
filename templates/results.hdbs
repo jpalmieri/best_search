@@ -49,7 +49,22 @@
         {{else}}
           <td>Only default variant</td>
         {{/if}}
-      {{else}}
+      {{/if}}
+      {{#if ../../isArticleSearch}}
+        {{#if this.draft}}
+          <td>Draft</td>
+        {{else}}
+          <td>Active</td>
+        {{/if}}
+      {{/if}}
+      {{#if ../../isMacroSearch}}
+        {{#if this.active}}
+          <td>Active</td>
+        {{else}}
+          <td>Inactive</td>
+        {{/if}}
+      {{/if}}
+      {{#if ../../isOtherSearch}}
         {{#if this.active}}
           <td>Active</td>
         {{else}}
