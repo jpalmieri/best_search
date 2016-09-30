@@ -186,7 +186,7 @@
       var excludeDrafts = !this.$('.check.status').is(':checked');
       if (searchType == 'article' && excludeDrafts) {
         results = _.reject(results, function(article){
-          return article.draft == true;
+          return article.draft === true;
         });
       }
 
