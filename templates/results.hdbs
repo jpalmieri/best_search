@@ -17,7 +17,7 @@
           </a>
         {{/if}}
         {{#if ../../isArticleSearch}}
-          <a href="/knowledge/articles/{{this.id}}/en-us?brand_id=196494"
+          <a href="/knowledge/articles/{{this.id}}/en-us?brand_id={{../../../brand}}"
           target="_blank" class='edit-this'>
             edit
           </a>

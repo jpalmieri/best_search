@@ -9,6 +9,7 @@
     dynamicContent: '/dynamic_content/items.json',
     article: '/help_center/articles.json'
   };
+  var BRAND_PATH = '/brands.json';
   var NEW_ITEM_PATH = {
     macro: '/rules/new?filter=macro',
     trigger: '/rules/new?filter=trigger',
@@ -23,6 +24,7 @@
       'pane.activated':                     'activate',
       'click .search.btn':                  'startSearch',
       'requestItems.done':                  'processResults',
+      'getBrands.done':                     'processBrands',
       'click .stop.btn':                    'stopSearch',
       'mousedown .results th':              'beforeSort',
       'mouseup .results th':                'sortTable',
@@ -33,7 +35,17 @@
     },
 
     requests: {
+      // General request which returns items to be searched
       requestItems: function(url) {
+        return {
+          url:       url,
+          type:     'GET',
+          dataType: 'json'
+        };
+      },
+      // This is used to populate the 'brands' dropdown in article search
+      // The brand isn't used for the search, but is used for the 'edit' links
+      getBrands: function(url) {
         return {
           url:       url,
           type:     'GET',
@@ -42,7 +54,16 @@
       }
     },
 
+    processBrands: function(data) {
+      // cache brands for dropdown
+      this.store('brands', data.brands);
+    },
+
     initialize: function() {
+      // make request for brands if it's not cached
+      if (!this.store('brands')) {
+        this.ajax('getBrands', API_PATH + BRAND_PATH );
+      }
       this.stopped = true;
       this.initialized = true;
     },
@@ -67,7 +88,7 @@
     },
 
     renderSearchForm: function(searchType) {
-      var searchFields = this.renderTemplate('search-form-' + searchType);
+      var searchFields = this.renderTemplate('search-form-' + searchType, {brands: this.store('brands')});
       var newItemPath = NEW_ITEM_PATH[searchType];
       var isDcSearch = searchType == 'dynamicContent';
       var templateData = {
@@ -208,7 +229,9 @@
         isDcSearch: searchType == 'dynamicContent',
         isMacroSearch: searchType == 'macro',
         isArticleSearch: searchType == 'article',
-        isOtherSearch: searchType != 'dynamicContent' && searchType != 'macro' && searchType != 'article'
+        isOtherSearch: searchType != 'dynamicContent' && searchType != 'macro' && searchType != 'article',
+        // brand is needed to populate the 'id' query parameter in the 'edit' link
+        brand: this.$('select.brand').find(':selected').attr('value')
       };
       var resultsTemplate = this.renderTemplate('results', options);
       this.$('.results tbody').append(resultsTemplate);

@@ -1,6 +1,17 @@
 <table class='table search-options'>
   <tbody>
 
+    <tr>
+      <td>Brand</td>
+      <td>
+        <select dropdown class='dropdown brand query'>
+          {{#each brands}}
+              <option value='{{id}}'>{{name}}</option>
+          {{/each}}
+        </select>
+      </td>
+    </tr>
+
     <tr data-filter='title' >
       <td>Title includes</td>
       <td>
