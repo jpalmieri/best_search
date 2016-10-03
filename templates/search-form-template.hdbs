@@ -11,7 +11,11 @@
     <a href='{{newItemPath}}' target='_blank'>
       {{#if isDcSearch}}
         Create new dynamic content item
-      {{else}}
+      {{/if}}
+      {{#if isArticleSearch}}
+        <!-- don't render create link for articles -->
+      {{/if}}
+      {{#if isOtherSearch}}
         Create new {{searchType}}
       {{/if}}
     </a>

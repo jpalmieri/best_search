@@ -75,7 +75,8 @@
         searchFields: searchFields,
         searchType:   searchType,
         newItemPath:  newItemPath,
-        isDcSearch:   isDcSearch
+        isDcSearch:   isDcSearch,
+        isOtherSearch: searchType != 'dynamicContent' && searchType != 'article'
       };
       return this.renderTemplate('search-form-template', templateData);
     },
