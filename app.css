@@ -13,10 +13,6 @@ form {
     width: 85%;
   }
 
-  select.query {
-    width: 93%;
-  }
-
   .query-clear {
     position: absolute;
     right: 18px;

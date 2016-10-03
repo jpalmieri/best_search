@@ -4,7 +4,14 @@
       <td>
         {{#if ../../isDcSearch}}
           {{this.name}}
-        {{else}}
+        {{/if}}
+        {{#if ../../isArticleSearch}}
+          <a href='{{this.html_url}}'
+          target='_blank'>
+            {{this.title}}
+          </a>
+        {{/if}}
+        {{#if ../../isOtherSearch}}
           {{this.title}}
         {{/if}}
       </td>
@@ -17,10 +24,7 @@
           </a>
         {{/if}}
         {{#if ../../isArticleSearch}}
-          <a href="/knowledge/articles/{{this.id}}/en-us?brand_id={{../../../brand}}"
-          target="_blank" class='edit-this'>
-            edit
-          </a>
+          <!-- don't renter clone or edit links for article results-->
         {{/if}}
         {{#if ../../isMacroSearch}}
           <a href="admin/macros/new?macro_id={{this.id}}">
