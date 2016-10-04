@@ -2,31 +2,34 @@
   {{#if this}}
     <tr>
       <td>
-        {{#if ../../isDcSearch}}
+        {{#if ../../searchFormType.dynamicContent}}
           {{this.name}}
         {{/if}}
-        {{#if ../../isArticleSearch}}
+        {{#if ../../searchFormType.article}}
           <a href='{{this.html_url}}'
           target='_blank'>
             {{this.title}}
           </a>
         {{/if}}
-        {{#if ../../isOtherSearch}}
+        {{#if ../../searchFormType.macro}}
+          {{this.title}}
+        {{/if}}
+        {{#if ../../searchFormType.other}}
           {{this.title}}
         {{/if}}
       </td>
       <td>
         <!-- clone and edit links -->
-        {{#if ../../isDcSearch}}
+        {{#if ../../searchFormType.dynamicContent}}
           <a href="/dynamic_content/items/{{this.id}}"
           target="_blank" class='edit-this'>
             edit
           </a>
         {{/if}}
-        {{#if ../../isArticleSearch}}
+        {{#if ../../searchFormType.article}}
           <!-- don't renter clone or edit links for article results-->
         {{/if}}
-        {{#if ../../isMacroSearch}}
+        {{#if ../../searchFormType.macro}}
           <a href="admin/macros/new?macro_id={{this.id}}">
             clone
           </a>
@@ -35,8 +38,8 @@
             edit
           </a>
         {{/if}}
-        {{#if ../../isOtherSearch}}
-          <a href="/rules/new?copy_id={{this.id}}&filter={{../../type}}" target="_blank">
+        {{#if ../../searchFormType.other}}
+          <a href="/rules/new?copy_id={{this.id}}&filter={{../../../type}}" target="_blank">
             clone
           </a>
           <span class="delim">|</span>
@@ -47,28 +50,28 @@
       </td>
       <td>{{this.created_at}}</td>
       <td>{{this.updated_at}}</td>
-      {{#if ../../isDcSearch}}
+      {{#if ../../searchFormType.dynamicContent}}
         {{#if this.active}}
           <td>Active variants</td>
         {{else}}
           <td>Only default variant</td>
         {{/if}}
       {{/if}}
-      {{#if ../../isArticleSearch}}
+      {{#if ../../searchFormType.article}}
         {{#if this.draft}}
           <td>Draft</td>
         {{else}}
           <td>Active</td>
         {{/if}}
       {{/if}}
-      {{#if ../../isMacroSearch}}
+      {{#if ../../searchFormType.macro}}
         {{#if this.active}}
           <td>Active</td>
         {{else}}
           <td>Inactive</td>
         {{/if}}
       {{/if}}
-      {{#if ../../isOtherSearch}}
+      {{#if ../../searchFormType.other}}
         {{#if this.active}}
           <td>Active</td>
         {{else}}

@@ -70,13 +70,16 @@
     renderSearchForm: function(searchType) {
       var searchFields = this.renderTemplate('search-form-' + searchType);
       var newItemPath = NEW_ITEM_PATH[searchType];
-      var isDcSearch = searchType == 'dynamicContent';
+      var searchFormType = {};
+      searchFormType[searchType] = true;
+      if (searchType != 'dynamicContent' && searchType != 'article') {
+        searchFormType['other'] = true;
+      }
       var templateData = {
         searchFields: searchFields,
         searchType:   searchType,
         newItemPath:  newItemPath,
-        isDcSearch:   isDcSearch,
-        isOtherSearch: searchType != 'dynamicContent' && searchType != 'article'
+        searchFormType: searchFormType
       };
       return this.renderTemplate('search-form-template', templateData);
     },
@@ -204,13 +207,15 @@
 
     displayResults: function (results) {
       var searchType = this.$('.search-types a').closest('li.active').data('type');
+      var searchFormType = {};
+      searchFormType[searchType] = true;
+      if (searchType != 'dynamicContent' && searchType != 'macro' && searchType != 'article') {
+        searchFormType['other'] = true;
+      }
       var options = {
         results:    results,
         type:       searchType,
-        isDcSearch: searchType == 'dynamicContent',
-        isMacroSearch: searchType == 'macro',
-        isArticleSearch: searchType == 'article',
-        isOtherSearch: searchType != 'dynamicContent' && searchType != 'macro' && searchType != 'article'
+        searchFormType: searchFormType
       };
       var resultsTemplate = this.renderTemplate('results', options);
       this.$('.results tbody').append(resultsTemplate);
