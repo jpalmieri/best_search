@@ -7,7 +7,7 @@
     automation: '/automations/active.json',
     view: '/views/active.json',
     dynamicContent: '/dynamic_content/items.json',
-    article: '/help_center/articles.json'
+    article: '/help_center/%@/articles.json',
   };
   var NEW_ITEM_PATH = {
     macro: '/rules/new?filter=macro',
@@ -23,6 +23,7 @@
       'pane.activated':                     'activate',
       'click .search.btn':                  'startSearch',
       'requestItems.done':                  'processResults',
+      'getlocales.done':                    'processLocales',
       'click .stop.btn':                    'stopSearch',
       'mousedown .results th':              'beforeSort',
       'mouseup .results th':                'sortTable',
@@ -40,10 +41,19 @@
           type:     'GET',
           dataType: 'json'
         };
+      },
+      // Locales are used for returning articles (they're interpolated in the 'article' url)
+      getlocales: function() {
+        return {
+          url: '/api/v2/locales.json',
+          type: 'GET',
+          dataType: 'json'
+        };
       }
     },
 
     initialize: function() {
+      this.ajax('getlocales');
       this.stopped = true;
       this.initialized = true;
     },
@@ -54,6 +64,14 @@
         this.$('.search-types .active a').trigger('click');
         this.initialized = false;
       }
+    },
+
+    processLocales: function(data) {
+      // Move default locale to first in list (for select list on form)
+      var sortedLocales = _.sortBy(data.locales, function(locale) {
+        return !locale.default;
+      });
+      this.locales = sortedLocales;
     },
 
     switchSearchTemplate: function(event) {
@@ -68,7 +86,7 @@
     },
 
     renderSearchForm: function(searchType) {
-      var searchFields = this.renderTemplate('search-form-' + searchType);
+      var searchFields = this.renderTemplate('search-form-' + searchType, {locales: this.locales});
       var newItemPath = NEW_ITEM_PATH[searchType];
       var searchFormType = {};
       searchFormType[searchType] = true;
@@ -135,8 +153,14 @@
     buildApiUrl: function() {
       var searchType = this.$('.search-types a').closest('li.active').data('type');
       var includeInactive = this.$('.check.status').is(':checked');
-
       var apiUrl = API_PATH + ENDPOINT_PATH[searchType];
+
+      // Include locale in resource url if searcing articles
+      var locale = '';
+      if (searchType == 'article') {
+        locale = this.$('select.locale').find(':selected').attr('value').toLowerCase();
+        apiUrl = API_PATH + helpers.fmt(ENDPOINT_PATH['article'], locale);
+      }
 
       // Use a different endpoint if returning inactive items,
       // except for dynamic content and articles, which doesn't have this endpoint
