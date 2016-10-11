@@ -7,7 +7,7 @@
     automation: '/automations/active.json',
     view: '/views/active.json',
     dynamicContent: '/dynamic_content/items.json',
-    article: '/help_center/%@/articles.json',
+    article: '/help_center/%@/articles.json'
   };
   var NEW_ITEM_PATH = {
     macro: '/rules/new?filter=macro',
