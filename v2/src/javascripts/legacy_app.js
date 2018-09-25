@@ -23,7 +23,7 @@ const App = (function() {
   };
   return {
     events: {
-      "app.activated": "initialize",
+      "app.created": "initialize",
       "pane.activated": "activate",
       "click .search.btn": "startSearch",
       "requestItems.done": "processResults",

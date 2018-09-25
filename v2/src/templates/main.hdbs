@@ -1,1 +1,54 @@
-<p>{{t "hello" name=name}}</p>
+<header>
+  <h3>{{setting 'name'}}</h3>
+</header>
+
+<form action="" method="POST" class='well'>
+  <ul class='search-types nav nav-pills'>
+    <li class='active' data-type="macro" data-item='macros'>
+      <a>Macros</a>
+    </li>
+    <li data-type="trigger" data-item='triggers'>
+      <a>Triggers</a>
+    </li>
+    <li data-type="automation" data-item='automations'>
+      <a>Automations</a>
+    </li>
+    <li data-type="view" data-item='views'>
+      <a>Views</a>
+    </li>
+    <li data-type="dynamicContent" data-item='items'>
+      <a>Dynamic Content</a>
+    </li>
+    <li data-type="article" data-item='articles'>
+      <a>Articles</a>
+    </li>
+  </ul>
+
+  <div id='form-elements'></div>
+
+</form>
+
+<div class="results">
+ <h4 class="list-heading">
+  <span class='count'></span><i class="icon-loading-spinner"></i>
+</h4>
+ <table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th>Created on</th>
+      <th>Last updated</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+ </table>
+</div>
+
+<footer>
+  <small class="pull-right">by
+    <a href="https://github.com/jpalmieri" target="_blank" class="muted">{{author.name}}</a>&nbsp;&nbsp;
+  </small>
+</footer>
