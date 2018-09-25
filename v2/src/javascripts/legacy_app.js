@@ -8,7 +8,6 @@ window.Base64 = Base64;
 
 datepickerFactory($);
 
-
 const App = (function() {
   var API_PATH = "/api/v2";
   var ENDPOINT_PATH = {
@@ -510,10 +509,10 @@ const App = (function() {
         return contents;
       },
       getStringQuery: function(queryType) {
-        var query = this.$(".query." + queryType).val();
+        var query = $(".query." + queryType).val();
         var escapedQuery = query.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
         return new RegExp(escapedQuery, "i");
-      }.bind(this),
+      },
       getStartDateQuery: function(queryType) {
         return new Date(
           this.$(".query." + queryType + ".start-date")
