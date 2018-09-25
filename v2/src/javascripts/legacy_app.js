@@ -1,8 +1,13 @@
 import BaseApp from "base_app";
 import helpers from "helpers";
 import Base64 from "base64";
+import $ from 'jquery';
+import datepickerFactory from 'jquery-datepicker';
 window.helpers = helpers;
 window.Base64 = Base64;
+
+datepickerFactory($);
+
 
 const App = (function() {
   var API_PATH = "/api/v2";
