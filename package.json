@@ -74,7 +74,8 @@
   "scripts": {
     "build": "webpack -p",
     "watch": "webpack --watch",
-    "dev": "yarn run watch & zat server -p dist & wait"
+    "dev": "yarn run watch & zat server -p dist & wait",
+    "validate": "yarn run build && zat validate -p dist"
   },
   "version": "0.1.0",
   "dependencies": {
