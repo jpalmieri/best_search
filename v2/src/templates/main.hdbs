@@ -30,7 +30,7 @@
 
 <div class="results">
  <h4 class="list-heading">
-  <span class='count'></span><i class="icon-loading-spinner"></i>
+  <span class='count'></span><div class="spinner"></div>
 </h4>
  <table class='table table-striped'>
   <thead>

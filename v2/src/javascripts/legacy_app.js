@@ -155,7 +155,7 @@ const App = (function() {
       this.$(".results tbody").empty();
       this.$(".results th").removeClass("sorted ascending");
       this.stopped = false;
-      this.$(".icon-loading-spinner").css("display", "inline-block");
+      this.$(".spinner").css("display", "inline-block");
       this.$(".stop.btn").show();
       this.$(".count").text("");
       this.$(".results ul").empty();
@@ -199,7 +199,7 @@ const App = (function() {
       this.$("form *").prop("disabled", false);
       this.$(".stop.btn").hide();
       this.stopped = true;
-      this.$(".icon-loading-spinner").hide();
+      this.$(".spinner").hide();
     },
     processResults: function(data) {
       var itemType = this.$(".search-types a")
@@ -304,11 +304,11 @@ const App = (function() {
         $tableBody.empty().append(newList.reverse());
       }
 
-      this.$(".icon-loading-spinner").hide();
+      this.$(".spinner").hide();
     },
     // Display spinner while sorting results table
     beforeSort: function(event) {
-      this.$(".icon-loading-spinner").css("display", "inline-block");
+      this.$(".spinner").css("display", "inline-block");
       var $th = this.$(event.target);
       $th.addClass("sorted");
       $th.siblings().removeClass("sorted ascending");
