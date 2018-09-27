@@ -1,4 +1,5 @@
-// Copyright (c) 2018 by Alec Lomas (https://codepen.io/lowmess/pen/AroCu)
+// Copyright (c) 2018 by Joe Palmieri (https://codepen.io/jpalmieri/pen/xyKRNr)
+// Fork of an original work by Alec Lomas (https://codepen.io/lowmess/pen/AroCu)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
@@ -7,8 +8,8 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 $size: 75px;
-$shape-size: $size / 2;
-$soft-corner: $size / 10;
+$blue: #2ecc71;
+$green: #2980b9;
 
 .spinner {
   position: absolute;
@@ -16,27 +17,48 @@ $soft-corner: $size / 10;
   width: $size;
   height: $size;
   margin: auto;
-  animation: morph 5s ease 0s infinite;
+  animation: morph 3s ease 0s infinite;
+  background-color: $blue;
 }
+
 @keyframes morph {
   0% {
-    border-radius: $shape-size;
-    background-color: #2980b9;
-    transform: rotateZ(45deg);
+    background-color: $green;
+    clip-path: polygon(50% 54%, 50% 53%, 50% 54%, 50% 54%, 50% 54%, 50% 54%);
   }
-  25% {
-    border-radius: $soft-corner;
-    background-color: #e74c3c;
-    transform: rotateZ(90deg);
+  8.33% {
+    clip-path: polygon(50% 54%, 50% 53%, 50% 54%, 50% 54%, 50% 54%, 97% 96%);
   }
-  75% {
-    border-radius: $soft-corner;
-    background-color: #2ecc71; //#f1c40f;
-    transform: rotateZ(135deg);
+  16.63% {
+    clip-path: polygon(50% 54%, 50% 53%, 50% 54%, 50% 54%, 51% 94%, 97% 96%);
+  }
+  24.93% {
+    clip-path: polygon(50% 54%, 50% 53%, 50% 54%, 8% 89%, 51% 94%, 97% 96%);
+  }
+  32.23% {
+    clip-path: polygon(50% 54%, 50% 53%, 9% 50%, 8% 89%, 51% 94%, 97% 96%);
+    background-color: $blue;
+  }
+  40.53% {
+    clip-path: polygon(50% 54%, 19% 14%, 9% 50%, 8% 89%, 51% 94%, 97% 96%);
+  }
+  58.13% {
+    clip-path: polygon(61% 19%, 19% 14%, 9% 50%, 8% 89%, 51% 94%, 97% 96%);
+  }
+  66.43% {
+    background-color: $green;
+    clip-path: polygon(61% 19%, 19% 14%, 9% 50%, 8% 89%, 51% 94%, 46% 56%);
+  }
+  74.73% {
+    clip-path: polygon(61% 19%, 19% 14%, 9% 50%, 8% 89%, 46% 56%, 46% 56%);
+  }
+  83.03% {
+    clip-path: polygon(61% 19%, 19% 14%, 9% 50%, 46% 56%, 46% 56%, 46% 56%);
+  }
+  91.33% {
+    clip-path: polygon(61% 19%, 19% 14%, 48% 56%, 46% 56%, 46% 56%, 46% 56%);
   }
   100% {
-    border-radius: $shape-size;
-    background-color: #2980b9;
-    transform: rotateZ(180deg);
+    clip-path: polygon(61% 19%, 46% 56%, 48% 56%, 46% 56%, 46% 56%, 46% 56%);
   }
 }
