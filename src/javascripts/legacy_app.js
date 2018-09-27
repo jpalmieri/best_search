@@ -164,6 +164,11 @@ const App = (function() {
 
       return false;
     },
+    getSubdomain: function(client, callback) {
+      client.context().then(function(context) {
+        callback(context.account.subdomain);
+      });
+    },
     buildApiUrl: function() {
       var searchType = this.$(".search-types a")
         .closest("li.active")
@@ -270,17 +275,21 @@ const App = (function() {
         searchFormType["other"] = true;
       }
 
-      var options = {
-        results: results,
-        type: searchType,
-        searchFormType: searchFormType
-      };
-      var resultsTemplate = this.renderTemplate("results", options);
-      this.$(".results tbody").append(resultsTemplate); // Display result count
+      this.getSubdomain(this.zafClient, function(subdomain){
+        var options = {
+          results: results,
+          type: searchType,
+          searchFormType: searchFormType,
+          subdomain: subdomain
+        };
+        var resultsTemplate = this.renderTemplate("results", options);
+        // Display result count
+        this.$(".results tbody").append(resultsTemplate);
 
-      this.$(".count").html(
-        "Displaying " + this.$(".results tbody tr").length + " results"
-      );
+        this.$(".count").html(
+          "Displaying " + this.$(".results tbody tr").length + " results"
+        );
+      }.bind(this));
     },
     // Toggles acending/decending order of the column header clicked
     sortTable: function(event) {
