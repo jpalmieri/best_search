@@ -512,21 +512,21 @@ const App = (function() {
       },
       getStartDateQuery: function(queryType) {
         return new Date(
-          this.$(".query." + queryType + ".start-date")
+          $(".query." + queryType + ".start-date")
             .val()
             .toLowerCase()
         );
-      }.bind(this),
+      },
       getEndDateQuery: function(queryType) {
         return new Date(
-          this.$(".query." + queryType + ".end-date")
+          $(".query." + queryType + ".end-date")
             .val()
             .toLowerCase()
         );
-      }.bind(this),
+      },
       stripHTMLTags: function(string) {
         return string.replace(/<br>/, " ").replace(/<(?:.|\n)*?>/gm, "");
-      }.bind(this)
+      }
     }
   };
 })();
