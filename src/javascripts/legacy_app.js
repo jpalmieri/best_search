@@ -16,11 +16,11 @@ const App = (function() {
     article: "/help_center/%@/articles.json"
   };
   var NEW_ITEM_PATH = {
-    macro: "/agent/admin/macros/new",
-    trigger: "/agent/admin/triggers/new",
-    automation: "/agent/admin/automations/new",
-    view: "/agent/admin/views/new",
-    dynamicContent: "/dynamic_content/items/new"
+    macro: "agent/admin/macros/new",
+    trigger: "agent/admin/triggers/new",
+    automation: "agent/admin/automations/new",
+    view: "agent/admin/views/new",
+    dynamicContent: "dynamic_content/items/new"
   };
   return {
     events: {
@@ -79,8 +79,10 @@ const App = (function() {
     switchSearchTemplate: function(event) {
       var $selectedOption = this.$(event.target).closest("li");
       var searchType = $selectedOption.data("type");
-      var searchFormHtml = this.renderSearchForm(searchType);
-      this.$("#form-elements").html(searchFormHtml);
+      this.getSubdomain(this.zafClient, function(subdomain) {
+        var searchFormHtml = this.renderSearchForm(searchType, subdomain);
+        this.$("#form-elements").html(searchFormHtml);
+      }.bind(this));
 
       // Add jQuery datepicker to date fields
       this.$(".query.date").datepicker({
@@ -93,7 +95,7 @@ const App = (function() {
         .siblings()
         .removeClass("active");
     },
-    renderSearchForm: function(searchType) {
+    renderSearchForm: function(searchType, subdomain) {
       var searchFields = this.renderTemplate("search-form-" + searchType, {
         locales: this.locales
       });
@@ -104,11 +106,11 @@ const App = (function() {
       if (searchType != "dynamicContent" && searchType != "article") {
         searchFormType["other"] = true;
       }
-
       var templateData = {
         searchFields: searchFields,
         searchType: searchType,
         newItemPath: newItemPath,
+        subdomain: subdomain,
         searchFormType: searchFormType
       };
       return this.renderTemplate("search-form-template", templateData);
