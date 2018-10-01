@@ -1,3 +1,7 @@
+<header>
+  <h3>{{setting 'name'}}</h3>
+</header>
+
 <form action="" method="POST" class='well'>
   <ul class='search-types nav nav-pills'>
     <li class='active' data-type="macro" data-item='macros'>
@@ -20,13 +24,13 @@
     </li>
   </ul>
 
-  <div id='form-elements'></div>
+    <section data-main />
 
 </form>
 
 <div class="results">
  <h4 class="list-heading">
-  <span class='count'></span><div class="spinner"></div>
+  <span class='count'></span><i class="icon-loading-spinner"></i>
 </h4>
  <table class='table table-striped'>
   <thead>
