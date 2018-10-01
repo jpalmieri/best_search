@@ -80,12 +80,14 @@ const App = (function() {
       var $selectedOption = this.$(event.target).closest("li");
       var searchType = $selectedOption.data("type");
       var searchFormHtml = this.renderSearchForm(searchType);
-      this.$("#form-elements").html(searchFormHtml); // Add jQuery datepicker to date fields
+      this.$("#form-elements").html(searchFormHtml);
 
+      // Add jQuery datepicker to date fields
       this.$(".query.date").datepicker({
         dateFormat: "yy-mm-dd"
-      }); // UI: Make current tab highlighted (and only current tab)
+      });
 
+      // UI: Make current tab highlighted (and only current tab)
       $selectedOption
         .addClass("active")
         .siblings()
