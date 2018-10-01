@@ -16,10 +16,10 @@ const App = (function() {
     article: "/help_center/%@/articles.json"
   };
   var NEW_ITEM_PATH = {
-    macro: "/rules/new?filter=macro",
-    trigger: "/rules/new?filter=trigger",
-    automation: "/rules/new?filter=automation",
-    view: "/rules/new?filter=view",
+    macro: "/agent/admin/macros/new",
+    trigger: "/agent/admin/triggers/new",
+    automation: "/agent/admin/automations/new",
+    view: "/agent/admin/views/new",
     dynamicContent: "/dynamic_content/items/new"
   };
   return {
